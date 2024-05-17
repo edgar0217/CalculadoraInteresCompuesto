@@ -1,0 +1,53 @@
+<style>
+  .btn-custom-dark {
+    background-color: #343a40;
+    border-color: #343a40;
+    color: white;
+  }
+
+  .btn-custom-dark:hover {
+    background-color: #23272b;
+    border-color: #1d2124;
+    color: #c3e0fd;
+  }
+
+  .btn-custom-blue {
+    background-color: #004085;
+    border-color: #004085;
+    color: white;
+  }
+
+  .btn-custom-blue:hover {
+    background-color: #002752;
+    border-color: #001a36;
+    color: #c3e0fd;
+  }
+
+  .card-custom {
+    background-color: #c3e0fd;
+    border-radius: 10px;
+    padding: 30px;
+  }
+
+  .icon-large {
+    font-size: 3rem;
+    color: #004085;
+  }
+</style>
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 col-lg-4">
+    <div class="card card-custom shadow-sm border-0">
+      <div class="card-body text-center">
+        <i class="fas fa-user-plus icon-large mb-3"></i>
+        <p class="lead">Crea una cuenta o inicia sesión</p>
+        <a href="/users/register" class="btn btn-custom-dark btn-lg btn-block mb-3">
+          <i class="fas fa-user-plus"></i> Registrarme
+        </a>
+        <a href="/users/login" class="btn btn-custom-blue btn-lg btn-block">
+          <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

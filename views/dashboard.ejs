@@ -1,0 +1,128 @@
+<div class="sidebar close">
+    <div class="logo-details">
+        <i class='bx bx-menu'></i> <span class="logo_name">Menu</span>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="#">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Inicio</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Menu</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class='bx bxs-calculator'></i>
+                <span class="link_name">Calculadora</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Calculadora</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-question-mark'></i>
+                <span class="link_name">Simbologia</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Simbologia</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-dollar'></i>
+                <span class="link_name">opcion 4</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">opcion 4</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="profile-details">
+                <div class="profile-content">
+                </div>
+                <div class="name-job">
+                    <div class="profile_name">Calculadora</div>
+                    <div class="job">
+                        <p class="lead mb-3" style="color: white;">Hola <%= name %>
+                        </p>
+
+                    </div>
+                </div>
+                <i class='bx bx-power-off' id="icono-salir"></i>
+            </div>
+        </li>
+    </ul>
+</div>
+<section class="home-section">
+    <div class="home-content">
+
+        <span class="text">Calculadora de Interes Compuesto</span>
+    </div>
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+            <div class="ag-courses_item menuMOD">
+                <a href="/users/calculator" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+
+                    <div class="ag-courses-item_title">Calculadora&#160;<i class="zmdi zmdi-library"></i></div>
+                </a>
+            </div>
+
+            <div class="ag-courses_item menuMOD">
+                <a href="#" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+
+                    <div class="ag-courses-item_title">Simbologia&#160;<i class="zmdi zmdi-library"></i></div>
+
+                </a>
+            </div>
+
+            <div class="ag-courses_item menuMOD">
+                <a href="#" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+
+                    <div class="ag-courses-item_title">Ejercicios de Interes Compuesto&#160;<i
+                            class="zmdi zmdi-library"></i></div>
+
+                </a>
+            </div>
+        </div>
+</section>
+
+<script>
+
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+    const divIconos = document.getElementById("icono-salir");
+
+    // Agrega un evento de clic al div
+    divIconos.addEventListener("click", function () {
+        // Muestra un mensaje de confirmación
+        Swal.fire({
+            title: "¿Estás seguro de querer salir?",
+            text: "Estás a punto de cerrar sesión",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, salir",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/users/logout";
+                /*index.html(incio de sesion)*/
+            }
+        });
+    });
+</script>
