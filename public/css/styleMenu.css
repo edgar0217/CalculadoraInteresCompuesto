@@ -360,7 +360,6 @@ body {
   .ag-courses-itm_date-box {
     font-size: 18pex;
     color: #FFF;
-  
     z-index: 2;
     position: relative;
   }
@@ -529,7 +528,7 @@ body {
     border: solid 5px black;
   }
   body {
-    font-family: Arial, sans-serif;
+    font-family: fira code, Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
   }

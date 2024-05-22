@@ -1,79 +1,113 @@
-<div class="container mx-auto p-4 bg-gray-800 text-white">
-    <h1 class="my-4 text-center text-2xl font-bold">Calculadora de Interés Compuesto</h1>
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        background-color: #2d3748;
 
-    <div class="mb-4">
-        <label for="producto" class="block text-sm font-medium">Producto:</label>
-        <input type="text"
-            class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-600 text-white"
-            id="producto">
-    </div>
+    }
 
-    <div class="mb-4">
-        <label for="costo" class="block text-sm font-medium">Costo inicial del producto:</label>
-        <input type="number"
-            class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-600 text-white"
-            id="costo" min="0" step="0.01">
-    </div>
+    .container-full {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #2d3748;
+        color: white;
+    }
 
-    <div class="mb-4">
-        <label for="credito" class="block text-sm font-medium">¿Es a crédito?</label>
-        <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-            id="credito" onchange="toggleCredito()">
-    </div>
+    .content {
+        width: 80%;
+        max-width: auto;
+    }
+</style>
+<div class="container-full">
+    <div class="content p-4 bg-gray-800 text-white rounded-md shadow-md">
+        <h1 class="my-4 text-center text-2xl font-bold">Calculadora de Interés Compuesto</h1>
 
-    <div id="opcionesCredito" class="hidden">
         <div class="mb-4">
-            <label for="mensualidad" class="block text-sm font-medium">Mensualidades:</label>
-            <select
+            <label for="producto" class="block text-sm font-medium">Producto:</label>
+            <input type="text"
                 class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-600 text-white"
-                id="mensualidad">
-                <option value="6">6 meses</option>
-                <option value="12">12 meses</option>
-                <option value="16">16 meses</option>
-                <option value="24">24 meses</option>
-                <option value="48">48 meses</option>
-                <!-- Agrega más opciones si lo necesitas -->
-            </select>
+                id="producto">
         </div>
 
         <div class="mb-4">
-            <label for="valorcredito" class="block text-sm font-medium">Costo a crédito:</label>
+            <label for="costo" class="block text-sm font-medium">Costo inicial del producto:</label>
             <input type="number"
                 class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-600 text-white"
-                id="valorcredito" min="0" step="0.01">
+                id="costo" min="0" step="0.01">
         </div>
 
-        <button
-            class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            onclick="calcular()">Calcular</button>
-    </div>
+        <div class="mb-4">
+            <label for="credito" class="block text-sm font-medium">¿Es a crédito?</label>
+            <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                id="credito" onchange="toggleCredito()">
+        </div>
 
-    <div id="resultadoInteresCompuesto" class="my-4 text-center hidden">
-        <h2 class="text-xl font-semibold">Interés Compuesto</h2>
-        <p id="valorInteresCompuesto"></p>
-    </div>
+        <div id="opcionesCredito" class="hidden">
+            <div class="mb-4">
+                <label for="mensualidad" class="block text-sm font-medium">Mensualidades:</label>
+                <select
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-600 text-white"
+                    id="mensualidad">
+                    <option value="6">6 meses</option>
+                    <option value="12">12 meses</option>
+                    <option value="16">16 meses</option>
+                    <option value="24">24 meses</option>
+                    <option value="48">48 meses</option>
+                    <!-- Agrega más opciones si lo necesitas -->
+                </select>
+            </div>
 
-    <table class="table-auto w-full mt-4 hidden" id="resultados">
-        <thead>
-            <tr class="bg-gray-700 text-white">
-                <th class="px-4 py-2 text-center" colspan="4" style="background-color: #4a5568; color: white;">Tabla de
-                    Depreciación</th>
-            </tr>
-            <tr class="bg-gray-700 text-white">
-                <th class="px-4 py-2">Año</th>
-                <th class="px-4 py-2">Valor en Libros</th>
-                <th class="px-4 py-2">Cargo Anual</th>
-                <th class="px-4 py-2">Valor Recuperado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Aquí se generará la tabla con los resultados -->
-        </tbody>
-    </table>
+            <div class="mb-4">
+                <label for="valorcredito" class="block text-sm font-medium">Costo a crédito:</label>
+                <input type="number"
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-600 text-white"
+                    id="valorcredito" min="0" step="0.01">
+            </div>
+
+            <button
+                class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                onclick="calcular()">Calcular</button>
+        </div>
+
+        <div id="resultadoInteresCompuesto" class="my-4 text-center hidden">
+            <h2 class="text-xl font-semibold">Interés Compuesto</h2>
+            <p id="valorInteresCompuesto"></p>
+        </div>
+
+        <table class="table-auto w-full mt-4 hidden" id="resultados">
+            <thead>
+                <tr class="bg-gray-700 text-white">
+                    <th class="px-4 py-2 text-center" colspan="4" style="background-color: #4a5568; color: white;">Tabla
+                        de Depreciación</th>
+                </tr>
+                <tr class="bg-gray-700 text-white">
+                    <th class="px-4 py-2">Año</th>
+                    <th class="px-4 py-2">Valor en Libros</th>
+                    <th class="px-4 py-2">Cargo Anual</th>
+                    <th class="px-4 py-2">Valor Recuperado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se generará la tabla con los resultados -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
-
 <script>
+    function toggleCredito() {
+        var creditoCheckbox = document.getElementById('credito');
+        var opcionesCredito = document.getElementById('opcionesCredito');
+        if (creditoCheckbox.checked) {
+            opcionesCredito.classList.remove('hidden');
+        } else {
+            opcionesCredito.classList.add('hidden');
+        }
+    }
+
     function calcular() {
         // Obtener los valores de entrada
         const producto = document.getElementById('producto').value;
@@ -100,11 +134,9 @@
         // Limpiar la tabla de resultados previos
         tbody.innerHTML = '';
 
-
         // Mostrar la tabla de resultados
         tablaResultados.style.display = 'table';
     }
-
 
     // Mostrar u ocultar las opciones de crédito según la selección
     document.getElementById('credito').addEventListener('change', function () {
