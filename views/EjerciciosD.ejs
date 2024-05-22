@@ -1,5 +1,5 @@
 <div class="container mx-auto p-4 bg-gray-800 text-white">
-    <h1 class="my-4 text-center text-2xl font-bold">Calculadora de Interés Compuesto</h1>
+    <h1 class="my-4 text-center text-2xl font-bold">Ejercicios de depreciacion </h1>
 
     <div class="mb-4">
         <label for="producto" class="block text-sm font-medium">Producto:</label>
@@ -43,6 +43,13 @@
                 id="valorcredito" min="0" step="0.01">
         </div>
 
+        <div class="mb-4">
+            <label for="vidaactivo" class="block text-sm font-medium">Vida del activo (en años):</label>
+            <input type="number"
+                class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-600 text-white"
+                id="vidaactivo" min="0" step="1">
+        </div>
+
         <button
             class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             onclick="calcular()">Calcular</button>
@@ -80,15 +87,7 @@
         const costo = parseFloat(document.getElementById('costo').value); // valoractivo
         const mensualidades = parseInt(document.getElementById('mensualidad').value);
         const valorcredito = parseFloat(document.getElementById('valorcredito').value);
-
-        // Calcular el interés compuesto
-        const interesCompuesto = Math.pow(valorcredito / costo, 1 / mensualidades) - 1;
-
-        // Mostrar el interés compuesto
-        const resultadoInteresCompuesto = document.getElementById('resultadoInteresCompuesto');
-        const valorInteresCompuesto = document.getElementById('valorInteresCompuesto');
-        valorInteresCompuesto.textContent = (interesCompuesto * 100).toFixed(2) + '%';
-        resultadoInteresCompuesto.classList.remove('hidden');
+        const vidaactivo = parseFloat(document.getElementById('vidaactivo').value);
 
         // Calcular la depreciación anual
         const depreciacionAnual = costo / vidaactivo;
@@ -100,6 +99,29 @@
         // Limpiar la tabla de resultados previos
         tbody.innerHTML = '';
 
+        // Calcular y mostrar los resultados de depreciación
+        let valorEnLibros = costo;
+        for (let i = 0; i <= vidaactivo; i++) {
+            let cargoAnual = 0;
+            let valorRecuperado = 0;
+            if (i > 0) {
+                cargoAnual = depreciacionAnual;
+                valorEnLibros -= cargoAnual;
+                valorRecuperado = costo - valorEnLibros;
+            }
+
+            // Crear una fila para el año actual
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${i}</td>
+                <td>${valorEnLibros.toFixed(2)}</td>
+                <td>${cargoAnual.toFixed(2)}</td>
+                <td>${valorRecuperado.toFixed(2)}</td>
+            `;
+
+            // Agregar la fila a la tabla
+            tbody.appendChild(fila);
+        }
 
         // Mostrar la tabla de resultados
         tablaResultados.style.display = 'table';

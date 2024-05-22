@@ -6,12 +6,17 @@ const passport = require('passport');
 
 //User model
 const User = require('../models/User');
+//const Product = requiere('../models/Product');
 
 //Login Page
 router.get('/login', (req, res) => res.render('login'));
 router.get('/calculator', (req, res) => res.render('calculator'));
+router.get('/EjerciciosD', (req, res) => res.render('EjerciciosD'));
+router.get('/simbologia', (req, res) => res.render('simbologia'));
 //Register Page
 router.get('/register', (req, res) => res.render('register'));
+
+
 
 
 //When we submit registration form

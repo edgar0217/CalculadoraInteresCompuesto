@@ -1,0 +1,85 @@
+<style>
+  .btn-custom-dark {
+    background-color: #343a40;
+    border-color: #343a40;
+    color: white;
+  }
+
+  .btn-custom-dark:hover {
+    background-color: #1f5081;
+    border-color: #1d2124;
+    color: white;
+  }
+
+  .card-custom {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .icon-large {
+    font-size: 2.5rem;
+    color: #004085;
+  }
+
+  .alert-custom {
+    border-radius: 5px;
+  }
+
+  .txt_ini {
+    color: #004085;
+  }
+  </style>
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 col-lg-4">
+    <div class="card card-custom shadow-sm border-0">
+      <div class="card-body">
+        <h1 class="text-center mb-4">
+          <i class="#"></i> Nuevo Producto
+        </h1>
+
+        <% if (typeof errors !='undefined' ) { %>
+          <% errors.forEach(function (error) { %>
+            <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
+              <%= error.msg %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <% }); %>
+              <% } %>
+
+                <% if (success_msg !='' ) { %>
+                  <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
+                    <%= success_msg %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <% } %>
+
+                            <form action="/users/registerproduct" method="POST">
+                              <div class="form-group">
+                                <label for="producto">Producto</label>
+                                <input type="producto" id="producto" name="producto" class="form-control"
+                                  placeholder="Ingresa nombre del producto"
+                                  value="<%= typeof producto != 'undefined' ? producto : '' %>" />
+                              </div>
+                              <div class="form-group">
+                                <label for="costoinicial">Costo Inicial del producto</label>
+                                <input type="costoinicial" id="costoinicial" name="costoinicial" class="form-control"
+                                  placeholder="Ingresa tu correo"
+                                  value="<%= typeof costoinicial!= 'undefined' ? costoinicial : '' %>" />
+                              </div>
+                            
+                              <button type="submit" class="btn btn-custom-dark btn-lg btn-block">
+                                <i class="#"></i> Registrar
+                              </button>
+                            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
