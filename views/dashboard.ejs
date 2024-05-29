@@ -16,19 +16,19 @@
         <li>
             <a href="/users/calculator">
                 <i class='bx bxs-calculator'></i>
-                <span class="link_name">Calculadora</span>
+                <span class="link_name">Interés compuesto</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Calculadora</a></li>
+                <li><a class="link_name" href="#">Calculadora IC</a></li>
             </ul>
         </li>
         <li>
             <a href="/users/simbologia">
                 <i class='bx bx-question-mark'></i>
-                <span class="link_name">Simbologia</span>
+                <span class="link_name">Simbología</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Simbologia</a></li>
+                <li><a class="link_name" href="#">Simbología</a></li>
             </ul>
         </li>
         <li>
@@ -37,7 +37,25 @@
                 <span class="link_name">Ejercicios</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Ejercicios Depreciacion</a></li>
+                <li><a class="link_name" href="#">Ejercicios de depreciación</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/users/tmar">
+                <i class='bx bx-search'></i>
+                <span class="link_name">TMAR</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Calcula la TMAR</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/users/proyInv">
+                <i class='bx bx-bar-chart'></i>
+                <span class="link_name">Evaluar proyecto</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Evalúa proyecto de inversión</a></li>
             </ul>
         </li>
         <li>
@@ -49,7 +67,6 @@
                     <div class="job">
                         <p class="lead mb-3" style="color: white;">Hola <%= name %>
                         </p>
-
                     </div>
                 </div>
                 <i class='bx bx-power-off' id="icono-salir"></i>
@@ -59,16 +76,17 @@
 </div>
 <section class="home-section">
     <div class="home-content">
-
-        <span class="text">Calculadora de Interés Compuesto</span>
+        <span class="text">Bienvenido a Econify: tu auxiliar en finanzas</span>
     </div>
+
     <div class="ag-format-container">
         <div class="ag-courses_box">
             <div class="ag-courses_item menuMOD">
                 <a href="/users/calculator" class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
 
-                    <div class="ag-courses-item_title">Calculadora&#160;<i class="zmdi zmdi-library"></i></div>
+                    <div class="ag-courses-item_title">Calcula interés compuesto&#160;<i class="zmdi zmdi-library"></i>
+                    </div>
                 </a>
             </div>
 
@@ -76,8 +94,7 @@
                 <a href="/users/simbologia" class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
 
-                    <div class="ag-courses-item_title">Simbologia&#160;<i class="zmdi zmdi-library"></i></div>
-
+                    <div class="ag-courses-item_title">Simbología&#160;<i class="zmdi zmdi-library"></i></div>
                 </a>
             </div>
 
@@ -85,16 +102,41 @@
                 <a href="/users/EjerciciosD" class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
 
-                    <div class="ag-courses-item_title">Ejercicios de Depreciación&#160;<i
-                            class="zmdi zmdi-library"></i></div>
+                    <div class="ag-courses-item_title">Ejercicios de Depreciación&#160;<i class="zmdi zmdi-library"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="ag-courses_item menuMOD">
+                <a href="/users/tmar" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
 
+                    <div class="ag-courses-item_title">Calcula TMAR&#160;<i class="zmdi zmdi-library"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="ag-courses_item menuMOD">
+                <a href="/users/proyInv" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+
+                    <div class="ag-courses-item_title">Evalúa proyecto de inversión&#160;<i
+                            class="zmdi zmdi-library"></i></div>
                 </a>
             </div>
         </div>
+        <div class="hijo" style="position: relative;">
+            <img id="imgp" src="mascota.png" alt="" srcset="" class="mascota-img">
+        </div>
+    </div>
+   
+
+
 </section>
 
-<script>
+<!-- Nuevo contenedor para la imagen -->
 
+
+
+<script>
     let arrow = document.querySelectorAll(".arrow");
     for (var i = 0; i < arrow.length; i++) {
         arrow[i].addEventListener("click", (e) => {

@@ -1,0 +1,849 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: #5c9cb8;
+    
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .container-wrapper {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    margin: 20px auto;
+  }
+
+  .instructions {
+    margin: 20px 0;
+    text-align: justify;
+    font-size: 20px;
+    color: #555;
+  }
+
+  .controls {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .controls label {
+    margin-right: 10px;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .cell {
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+  }
+
+  .cell input {
+    width: 90%;
+    height: 90%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: inherit;
+  }
+
+  .cell.header {
+    font-weight: bold;
+    background-color: #eee;
+  }
+
+  .capture-button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .sum-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .sum {
+    margin: 5px 0;
+  }
+
+  .pb-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .instruction-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+  }
+
+  .pb-instruction {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+    display: none;
+  }
+
+
+
+  .vpn-instruction {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+    display: none;
+  }
+
+
+
+
+  .input-bordered {
+    border: 2px solid #007bff;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100px;
+    text-align: right;
+  }
+
+  .tmr-container {
+    margin-top: 40px;
+  }
+
+  .calculate-pb-button-container {
+    margin-top: 20px;
+
+  }
+
+  .payback-container,
+  .annual-cash-flow-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  .payback-container {
+    margin-top: 10px;
+  }
+
+  .annual-cash-flow-container {
+    margin-top: 10px;
+  }
+
+
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px;
+    background: #03516d;
+    z-index: 100;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar.close {
+    width: 80px;
+  }
+
+  .sidebar .logo-details {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar .logo-details i {
+    font-size: 30px;
+    color: #fff;
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .sidebar .logo-details .logo_name {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s ease;
+    transition-delay: 0.1s;
+  }
+
+  .sidebar.close .logo-details .logo_name {
+    transition-delay: 0s;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar .nav-links {
+    height: 100%;
+    padding: 30px 0 150px 0;
+    overflow: auto;
+  }
+
+  .sidebar.close .nav-links {
+    overflow: visible;
+  }
+
+  .sidebar .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar .nav-links li {
+    position: relative;
+    list-style: none;
+    transition: all 0.4s ease;
+  }
+
+  .sidebar .nav-links li:hover {
+    background: #5c9cb8;
+  }
+
+  .sidebar .nav-links li .iocn-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar.close .nav-links li .iocn-link {
+    display: block;
+  }
+
+  .sidebar .nav-links li i {
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar .nav-links li.showMenu i.arrow {
+    transform: rotate(-180deg);
+  }
+
+  .sidebar.close .nav-links i.arrow {
+    display: none;
+  }
+
+  .sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .sidebar .nav-links li a .link_name {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    transition: all 0.4s ease;
+  }
+
+  .sidebar.close .nav-links li a .link_name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar .nav-links li .sub-menu {
+    padding: 6px 6px 14px 80px;
+    margin-top: -10px;
+    background: #5c9cb8;
+    display: none;
+  }
+
+  .sidebar .nav-links li.showMenu .sub-menu {
+    display: block;
+  }
+
+  .sidebar .nav-links li .sub-menu a {
+    color: #fff;
+    font-size: 15px;
+    padding: 5px 0;
+    white-space: nowrap;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar .nav-links li .sub-menu a:hover {
+    opacity: 1;
+  }
+
+  .sidebar.close .nav-links li .sub-menu {
+    position: absolute;
+    left: 100%;
+    top: -10px;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 6px 6px 0;
+    opacity: 0;
+    display: block;
+    pointer-events: none;
+    transition: 0s;
+  }
+
+  .sidebar.close .nav-links li:hover .sub-menu {
+    top: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+  }
+
+  .sidebar .nav-links li .sub-menu .link_name {
+    display: none;
+  }
+
+  .sidebar.close .nav-links li .sub-menu .link_name {
+    font-size: 18px;
+    opacity: 1;
+    display: block;
+  }
+
+  .sidebar .nav-links li .sub-menu.blank {
+    opacity: 1;
+    pointer-events: auto;
+    padding: 3px 20px 6px 16px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar .nav-links li:hover .sub-menu.blank {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .sidebar .profile-details {
+    position: fixed;
+    bottom: 0;
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #022d3d;
+    padding: 12px 0;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar.close .profile-details {
+    background: none;
+    width: 78px;
+  }
+
+  .sidebar .profile-details .profile-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .payback-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+  }
+
+
+  #payback-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .container-wrapper #payback-button {
+    display: block !important;
+    /* Asegura que el botón sea visible */
+  }
+
+  .tmar-container {
+    margin-top: 40px;
+    font-size: 18px;
+    color: #555
+  }
+
+  .vpn-container {
+    margin-top: 40px;
+    font-size: 18px;
+    color: #000000
+  }
+
+  .input-bordered {
+    border: 2px solid #007bff;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100px;
+    text-align: right;
+  }
+
+  #conclusion-container {
+    margin-top: 40px;
+  }
+
+  #conclusion-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  #conclusion-table th,
+  #conclusion-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  #conclusion-table th {
+    background-color: #f2f2f2;
+  }
+
+  #conclusion-button {
+    display: none;
+    /* Ocultar el botón Conclusión inicialmente */
+  }
+
+</style>
+</head>
+
+<body>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bx-menu'></i> <span class="logo_name">Menu</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="/users/calculator">
+          <i class='bx bxs-calculator'></i>
+          <span class="link_name">Interés compuesto</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Calculadora IC</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/users/simbologia">
+          <i class='bx bx-question-mark'></i>
+          <span class="link_name">Simbología</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Simbología</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/users/EjerciciosD">
+          <i class='bx bx-dollar'></i>
+          <span class="link_name">Ejercicios</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Ejercicios de depreciación</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/users/tmar">
+          <i class='bx bx-search'></i>
+          <span class="link_name">PB</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Calcula la TMAR</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/users/proyInv">
+          <i class='bx bx-bar-chart'></i>
+          <span class="link_name">Evaluar proyecto</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Evalúa proyecto de inversión</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+  <h1>Evalua tu proyecto de inversión</h1>
+  <div class="container-wrapper">
+    <div class="instructions">
+      Econify toma los valores ingresados de tres diferentes propuestas a analizar y con ello determina el camino
+      positivo a una inversión.
+    </div>
+
+
+    <div class="controls">
+      <label for="rows">Años a inversión:</label>
+      <input type="number" id="rows" class="input-bordered" min="1" step="0.01" placeholder="Ej: 5">
+      <button onclick="createMatrix()">Comenzar</button>
+
+    </div>
+
+
+    <div class="container" id="matrix-container">
+      <!-- Aquí se generará la matriz -->
+    </div>
+    <div class="capture-button-container" id="capture-button-container">
+      <button id="capture-button" onclick="captureInformation()" style="display: none;">Capturar información</button>
+    </div>
+    <div class="sum-container" id="sum-container">
+      <!-- Aquí se mostrarán las sumas -->
+    </div>
+    <div class="pb-instruction" id="pb-instruction" style="display: none;">
+      Asegúrate que el monto de la inversión y los flujos de efectivo del proyecto
+      fueron determinados correctamente. Si es así, presiona el siguiente botón:
+      <button id="payback-button" onclick="calculatePayback()" style="display: none;">
+        <i class='bx bx-check-double'></i> Evaluar proyectos
+      </button>
+    </div>
+    <div class="payback-container" id="payback-container">
+      <!-- Aquí se mostrará el Payback -->
+    </div>
+
+
+
+    <div class="tmar-container" id="tmar-container" style="display: none;">
+      <p>Ingrese el TMAR con el cual se evaluarán los proyectos:</p>
+      <input type="number" id="tmar" class="input-bordered" min="0" step="0.01" placeholder="Ej: 12">
+      <button onclick="captureTMAR()">Capturar</button>
+    </div>
+
+
+    <div class="vpn-container" id="vpn-container">
+      <!-- Aquí se mostrarán los VPN -->
+    </div>
+
+
+    <div id="conclusion-container" style="display: none;">
+      <h2>Conclusiones</h2>
+      <table id="conclusion-table">
+        <thead>
+          <tr>
+            <th>Proyecto</th>
+            <th>Payback</th>
+            <th>VPN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí se mostrarán los resultados -->
+        </tbody>
+      </table>
+      <p id="recommendation-message"></p>
+    </div>
+
+    <button id="conclusion-button" onclick="showConclusion()">Conclusión</button>
+
+  </div>
+
+
+
+  <script>
+    var data = {};
+
+
+    function createMatrix() {
+      var rows = parseInt(document.getElementById("rows").value, 10);
+      var container = document.getElementById("matrix-container");
+      container.innerHTML = ""; // Limpiar el contenido anterior
+
+      // Agregar encabezado
+      var headerLabels = ["Año", "A", "B", "C"];
+      for (var j = 0; j < 4; j++) {
+        var headerCell = document.createElement("div");
+        headerCell.classList.add("cell", "header");
+        headerCell.textContent = headerLabels[j];
+        container.appendChild(headerCell);
+      }
+
+      // Rellenar las filas
+      for (var i = 0; i < rows; i++) {
+        var yearCell = document.createElement("div");
+        yearCell.classList.add("cell");
+        yearCell.textContent = i;
+        container.appendChild(yearCell);
+
+        // Rellenar el resto de la fila con celdas vacías
+        for (var j = 0; j < 3; j++) {
+          var emptyCell = document.createElement("div");
+          emptyCell.classList.add("cell");
+          var input = document.createElement("input");
+          input.setAttribute("type", "text");
+          input.addEventListener('input', validateNumber);
+          emptyCell.appendChild(input);
+          container.appendChild(emptyCell);
+        }
+      }
+
+      // Crear contenedores para las sumas
+      var sumContainer = document.getElementById("sum-container");
+      sumContainer.innerHTML = ""; // Limpiar el contenido anterior
+      for (var j = 1; j <= 3; j++) {
+        var sumElement = document.createElement("div");
+        sumElement.classList.add("sum");
+        sumElement.id = "sum-col-" + j;
+        sumElement.textContent = `INGRESOS TOTALES ${headerLabels[j]} = 0`;
+        sumContainer.appendChild(sumElement);
+      }
+
+      // Ocultar las sumas inicialmente
+      sumContainer.style.display = "none";
+      // Mostrar el botón para capturar información
+      document.getElementById("capture-button").style.display = "inline-block";
+      document.getElementById("payback-button").style.display = "none";
+    }
+
+    function validateNumber(event) {
+      var input = event.target;
+      var value = input.value;
+      var regex = /^-?\d*\.?\d*$/;
+      if (!regex.test(value)) {
+        input.value = value.slice(0, -1);
+      }
+    }
+
+    function captureInformation() {
+      var rows = parseInt(document.getElementById("rows").value, 10);
+      var container = document.getElementById("matrix-container");
+      var data = { A: [], B: [], C: [] };
+
+      var sums = [0, 0, 0];
+
+      for (var i = 2; i <= rows; i++) { // Comenzar desde la tercera fila
+        for (var j = 1; j <= 3; j++) {
+          var cellValue = container.children[(i * 4) + j].querySelector('input').value;
+          var numericValue = parseFloat(cellValue) || 0;
+          sums[j - 1] += numericValue;
+          data[["A", "B", "C"][j - 1]].push(numericValue);
+        }
+      }
+
+      // Mostrar las sumas
+      for (var j = 1; j <= 3; j++) {
+        var headerLabels = ["A", "B", "C"];
+        document.getElementById(`sum-col-${j}`).textContent = `INGRESOS TOTALES ${headerLabels[j - 1]} = ${sums[j - 1]}`;
+      }
+
+      // Mostrar el contenedor de sumas
+      document.getElementById("sum-container").style.display = "flex";
+
+      // Mostrar el botón "Obtener Payback"
+      togglePaybackButton();
+      document.getElementById("pb-instruction").style.display = "block"; // Mostrar instrucciones de Payback
+      document.getElementById("conclusion-button").style.display = "inline-block";
+    }
+
+
+
+
+    function paybackPeriodEqualFlows(inversion_inicial, flujo_efectivo_anual) {
+      return inversion_inicial / flujo_efectivo_anual;
+    }
+
+    function paybackPeriodUnequalFlows(inversion_inicial, flujos_efectivo) {
+      var monto_restante = inversion_inicial;
+      var year = 0;
+
+      for (var fne of flujos_efectivo) {
+        year++;
+        monto_restante -= fne;
+        if (monto_restante <= 0) {
+          var fraccion_anual = (monto_restante + fne) * 12 / fne;
+          return year - 1 + fraccion_anual / 12;
+        }
+      }
+
+      return "La inversión no se recupera en el período dado";
+    }
+
+    function formatPaybackPeriod(period) {
+      var years = Math.floor(period);
+      var months = Math.floor((period - years) * 12);
+      var days = Math.round(((period - years) * 12 - months) * 30);
+      return `${years} años, ${months} meses, ${days} días`;
+    }
+
+
+    function calculatePayback() {
+      var rows = parseInt(document.getElementById("rows").value, 10);
+      var container = document.getElementById("matrix-container");
+      var data = { A: [], B: [], C: [] };
+
+      for (var i = 1; i <= rows; i++) {
+        for (var j = 1; j <= 3; j++) {
+          var cellValue = container.children[(i * 4) + j].querySelector('input').value;
+          var numericValue = parseFloat(cellValue) || 0;
+          data[["A", "B", "C"][j - 1]].push(numericValue);
+        }
+      }
+
+      var paybackResults = {}; // Objeto para almacenar los resultados del Payback
+
+      for (var option in data) {
+        var investment = data[option][0];
+        var cashFlows = data[option].slice(1);
+
+        if (cashFlows.every(flow => flow === cashFlows[0])) {
+          // Flujos de efectivo iguales
+          paybackResults[option] = paybackPeriodEqualFlows(investment, cashFlows[0]);
+        } else {
+          // Flujos de efectivo desiguales
+          paybackResults[option] = paybackPeriodUnequalFlows(investment, cashFlows);
+        }
+      }
+
+      // Mostrar el contenedor TMAR
+      document.getElementById("tmar-container").style.display = "block";
+
+      // Devolver los resultados del Payback
+      return paybackResults;
+    }
+
+
+
+    function captureTMAR() {
+      // Ocultar el contenedor TMAR
+      document.getElementById("tmar-container").style.display = "none";
+
+      // Capturar el TMAR ingresado
+      var tmar = parseFloat(document.getElementById("tmar").value);
+
+      // Calcular y mostrar VPN para cada opción
+      var data = { A: [], B: [], C: [] };
+      var rows = parseInt(document.getElementById("rows").value, 10);
+      var container = document.getElementById("matrix-container");
+
+      for (var i = 1; i <= rows; i++) {
+        for (var j = 1; j <= 3; j++) {
+          var cellValue = container.children[(i * 4) + j].querySelector('input').value;
+          var numericValue = parseFloat(cellValue) || 0;
+          data[["A", "B", "C"][j - 1]].push(numericValue);
+        }
+      }
+
+      var vpnResults = {}; // Objeto para almacenar los resultados de VPN
+
+      for (var option in data) {
+        var investment = data[option][0];
+        var cashFlows = data[option].slice(1);
+        var vpn = -investment;
+
+        for (var i = 0; i < cashFlows.length; i++) {
+          vpn += cashFlows[i] / Math.pow((1 + tmar / 100), i + 1);
+        }
+
+        // Almacenar el resultado de VPN en el objeto vpnResults
+        vpnResults[option] = vpn.toFixed(2);
+      }
+
+      // Devolver el objeto con los resultados de VPN
+      return vpnResults;
+
+      // Mostrar el botón Conclusión después de capturar el TMAR
+      document.getElementById("conclusion-button").style.display = "inline-block";
+
+
+    }
+
+    function togglePaybackButton() {
+      var button = document.getElementById("payback-button");
+      button.style.display = "block";
+    }
+
+
+    function showConclusion() {
+      var conclusionContainer = document.getElementById("conclusion-container");
+      conclusionContainer.style.display = "block";
+
+      var tableBody = document.querySelector("#conclusion-table tbody");
+      tableBody.innerHTML = "";
+
+      var projects = ["A", "B", "C"];
+
+      // Obtener resultados del Payback
+      var paybackResults = calculatePayback();
+
+      // Obtener resultados de la VPN
+      var vpnResults = captureTMAR();
+
+      // Llenar la tabla con los resultados de Payback y VPN
+      for (var i = 0; i < projects.length; i++) {
+        var project = projects[i];
+        var payback = formatPaybackPeriod(paybackResults[project]);
+        var vpn = vpnResults[project];
+
+        // Verificar si el resultado de VPN no es NaN antes de agregarlo a la tabla
+        if (!isNaN(vpn)) {
+          var row = document.createElement("tr");
+          row.innerHTML = `<td>${project}</td><td>${payback}</td><td>${vpn}</td>`;
+          tableBody.appendChild(row);
+        }
+      }
+
+      // Determinar proyecto recomendado
+      var recommendedProject = "";
+      var highestVpn = -Infinity;
+      for (var project in vpnResults) {
+        if (!isNaN(vpnResults[project]) && parseFloat(vpnResults[project]) > highestVpn) {
+          highestVpn = parseFloat(vpnResults[project]);
+          recommendedProject = project;
+        }
+      }
+      document.getElementById("recommendation-message").textContent = `Se recomienda tomar el proyecto ${recommendedProject}.`;
+      document.getElementById("recommendation-message").style.marginTop = "40px";
+    }
+
+
+    // Agrega esta función para obtener los datos de los proyectos:
+    function getData() {
+      var rows = parseInt(document.getElementById("rows").value, 10);
+      var container = document.getElementById("matrix-container");
+      var data = { A: [], B: [], C: [] };
+
+      for (var i = 1; i <= rows; i++) {
+        for (var j = 1; j <= 3; j++) {
+          var cellValue = container.children[(i * 4) + j].querySelector('input').value;
+          var numericValue = parseFloat(cellValue) || 0;
+          data[["A", "B", "C"][j - 1]].push(numericValue);
+        }
+      }
+
+      return data;
+    }
+
+
+  </script>
+</body>

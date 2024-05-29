@@ -1,7 +1,409 @@
-<div class="container mx-auto p-4 bg-gray-800 text-white">
-    <h1 class="my-4 text-center text-2xl font-bold">Simbologia</h1>
+<style>
+  body {
+    margin: 0;
+    /* Eliminar margen predeterminado del cuerpo */
+  }
 
-    <div class="mb-4">
-        <label for="producto" class="block text-sm font-medium">Holsa:</label>
+  .container-full {
+    height: 100%;
+    /* Ocupar toda la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5c9cb8;
+    color: white;
+  }
+
+  .style-body {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    width: 100%;
+    counter-reset: list;
+    background: #eee;
+  }
+
+  dl {
+    height: 40vh;
+    max-width: 70vh;
+    width: 100%;
+    align-self: center;
+    box-sizing: border-box;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+    background: -webkit-gradient(linear, left top, right top, color-stop(80%, #fff), to(transparent));
+    background: linear-gradient(to right, #fff 80%, transparent);
+    box-shadow: -5px 5px 5px 0px rgba(153, 153, 153, 0.05);
+    transition: box-shadow 0.3s ease-out;
+  }
+
+  dl:nth-child(even) {
+    margin-left: 20px;
+  }
+
+  dl:nth-child(odd) {
+    margin-right: 20px;
+  }
+
+  dl:hover {
+    box-shadow: 0px 5px 0px 0px rgba(153, 153, 153, 0);
+  }
+
+  dl:hover:before {
+    margin-left: 10px;
+  }
+
+  dl:before {
+    content: attr(data-letter);
+    /* Utiliza el atributo data-letter del elemento dl como contenido */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 60vh;
+    /* Tamaño grande */
+    color: #046b92;
+    font-weight: bold;
+    margin-left: -20px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translatey(-52%);
+    transition: margin 0.2s ease-out;
+  }
+
+
+  dt {
+    color: rgb(209, 129, 24);
+    font-size: 3.5vh;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  dd {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    max-width: 45%;
+    margin-left: 55%;
+    padding: 5px;
+    color: #484747;
+    font-size: 2.3vh;
+  }
+
+
+
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px;
+    background: #03516d;
+    z-index: 100;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar.close {
+    width: 80px;
+  }
+
+  .sidebar .logo-details {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar .logo-details i {
+    font-size: 30px;
+    color: #fff;
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .sidebar .logo-details .logo_name {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s ease;
+    transition-delay: 0.1s;
+  }
+
+  .sidebar.close .logo-details .logo_name {
+    transition-delay: 0s;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar .nav-links {
+    height: 100%;
+    padding: 30px 0 150px 0;
+    overflow: auto;
+  }
+
+  .sidebar.close .nav-links {
+    overflow: visible;
+  }
+
+  .sidebar .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar .nav-links li {
+    position: relative;
+    list-style: none;
+    transition: all 0.4s ease;
+  }
+
+  .sidebar .nav-links li:hover {
+    background: #5c9cb8;
+  }
+
+  .sidebar .nav-links li .iocn-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar.close .nav-links li .iocn-link {
+    display: block;
+  }
+
+  .sidebar .nav-links li i {
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar .nav-links li.showMenu i.arrow {
+    transform: rotate(-180deg);
+  }
+
+  .sidebar.close .nav-links i.arrow {
+    display: none;
+  }
+
+  .sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .sidebar .nav-links li a .link_name {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    transition: all 0.4s ease;
+  }
+
+  .sidebar.close .nav-links li a .link_name {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar .nav-links li .sub-menu {
+    padding: 6px 6px 14px 80px;
+    margin-top: -10px;
+    background: #5c9cb8;
+    display: none;
+  }
+
+  .sidebar .nav-links li.showMenu .sub-menu {
+    display: block;
+  }
+
+  .sidebar .nav-links li .sub-menu a {
+    color: #fff;
+    font-size: 15px;
+    padding: 5px 0;
+    white-space: nowrap;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar .nav-links li .sub-menu a:hover {
+    opacity: 1;
+  }
+
+  .sidebar.close .nav-links li .sub-menu {
+    position: absolute;
+    left: 100%;
+    top: -10px;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 6px 6px 0;
+    opacity: 0;
+    display: block;
+    pointer-events: none;
+    transition: 0s;
+  }
+
+  .sidebar.close .nav-links li:hover .sub-menu {
+    top: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+  }
+
+  .sidebar .nav-links li .sub-menu .link_name {
+    display: none;
+  }
+
+  .sidebar.close .nav-links li .sub-menu .link_name {
+    font-size: 18px;
+    opacity: 1;
+    display: block;
+  }
+
+  .sidebar .nav-links li .sub-menu.blank {
+    opacity: 1;
+    pointer-events: auto;
+    padding: 3px 20px 6px 16px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar .nav-links li:hover .sub-menu.blank {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .sidebar .profile-details {
+    position: fixed;
+    bottom: 0;
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #022d3d;
+    padding: 12px 0;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar.close .profile-details {
+    background: none;
+    width: 78px;
+  }
+
+  .sidebar .profile-details .profile-content {
+    display: flex;
+    align-items: center;
+  }
+</style>
+
+
+<body>
+
+
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bx-menu'></i> <span class="logo_name">Menu</span>
     </div>
-</div>
+    <ul class="nav-links">
+
+      <li>
+        <a href="/users/calculator">
+          <i class='bx bxs-calculator'></i>
+          <span class="link_name">Interés compuesto</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Calculadora IC</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/users/simbologia">
+          <i class='bx bx-question-mark'></i>
+          <span class="link_name">Simbología</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Simbología</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/users/EjerciciosD">
+          <i class='bx bx-dollar'></i>
+          <span class="link_name">Ejercicios</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Ejercicios de depreciación</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/users/tmar">
+            <i class='bx bx-search'></i>
+            <span class="link_name">TMAR</span>
+        </a>
+        <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Calcula la TMAR</a></li>
+        </ul>
+    </li>
+      <li>
+        <a href="/users/proyInv">
+          <i class='bx bx-bar-chart'></i>
+          <span class="link_name">Evaluar proyecto</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Evalúa proyecto de inversión</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+  <div class="container-full">
+    <div class="content p-4"
+      style="background-color: #0a6e8e; color: white; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+      <h1 class="my-4 text-center text-4xl font-bold">Simbología económica</h1>
+
+      <div class="style-body">
+        <dl data-letter="P">
+          <dt>CAPITAL INICIAL</dt>
+          <dd>Representa el capital inicial o la cantidad con la que comienzas la inversión.
+            Es la base sobre la cual se calcula el interés.</dd>
+        </dl>
+
+        <dl data-letter="A">
+          <dt>VALOR FUTURO</dt>
+          <dd> Indica el valor futuro o el monto final al que crecerá el capital inicial
+            después de un cierto período de tiempo, incluyendo tanto el capital inicial como los intereses generados.
+          </dd>
+        </dl>
+        <dl data-letter="n">
+          <dt>PERIODOS CAPITAL</dt>
+          <dd>Cantidad de veces que el interés se capitaliza en un período determinado. </dd>
+        </dl>
+
+        <dl data-letter="f">
+          <dt>INFLACIÓN</dt>
+          <dd>Tasa de inflación esperada, es crucial
+            para calcular el valor presente neto (VPN) y determinar si un proyecto de inversión es viable en términos
+            reales.</dd>
+        </dl>
+        <dl data-letter="i">
+          <dt>PREMIO AL RIESGO</dt>
+          <dd>Tasa de interés que un inversionista espera obtener por arriesgar
+            su capital en una inversión con un nivel de riesgo determinado.</dd>
+        </dl>
+        <dl data-letter="r">
+          <dt>TASA RETORNO</dt>
+          <dd>Representa la tasa de retorno o rendimiento de una inversión. Esta tasa puede ser utilizada en diversos
+            cálculos financieros
+            para determinar el crecimiento del capital o la rentabilidad de una inversión.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

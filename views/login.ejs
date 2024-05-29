@@ -1,4 +1,15 @@
 <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: #116b87;
+    
+  }
+
   .btn-custom-dark {
     background-color: #343a40;
     border-color: #343a40;
@@ -12,7 +23,7 @@
   }
 
   .card-custom {
-    background-color: #f8f9fa;
+    background-color: #9cdcfc;
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,6 +42,8 @@
     color: #004085;
   }
 </style>
+</head>
+<body>
 
 <div class="row justify-content-center mt-5">
   <div class="col-md-6 col-lg-4">
@@ -40,63 +53,63 @@
           <i class="fas fa-sign-in-alt icon-large"></i> Iniciar sesión
         </h1>
 
-        <% if (typeof errors !='undefined' ) { %>
+        <% if (typeof errors != 'undefined') { %>
           <% errors.forEach(function (error) { %>
             <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
               <%= error.msg %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <% }); %>
-              <% } %>
+          <% }); %>
+        <% } %>
 
-                <% if (success_msg !='' ) { %>
-                  <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
-                    <%= success_msg %>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <% } %>
+        <% if (success_msg != '') { %>
+          <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
+            <%= success_msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% } %>
 
-                    <% if (error_msg !='' ) { %>
-                      <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
-                        <%= error_msg %>
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <% } %>
+        <% if (error_msg != '') { %>
+          <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
+            <%= error_msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% } %>
 
-                        <% if (error !='' ) { %>
-                          <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
-                            <%= error %>
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>
-                          <% } %>
+        <% if (error != '') { %>
+          <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
+            <%= error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% } %>
 
-                            <form action="/users/login" method="POST">
-                              <div class="form-group">
-                                <label for="email">Correo</label>
-                                <input type="email" id="email" name="email" class="form-control"
-                                  placeholder="Ingresa tu correo" />
-                              </div>
-                              <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" id="password" name="password" class="form-control"
-                                  placeholder="Ingresa tu contraseña" />
-                              </div>
-                              <button type="submit" class="btn btn-custom-dark btn-lg btn-block">
-                                <i class="fas fa-sign-in-alt"></i> Iniciar sesión
-                              </button>
-                            </form>
-                            <p class="lead mt-4 text-center">
-                              ¿No tienes una cuenta? <a href="/users/register" class=" txt_reg">Registrarme</a>
-                            </p>
+        <form action="/users/login" method="POST">
+          <div class="form-group">
+            <label for="email">Correo</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Ingresa tu correo" />
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Ingresa tu contraseña" />
+          </div>
+          <button type="submit" class="btn btn-custom-dark btn-lg btn-block">
+            <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+          </button>
+        </form>
+        <p class="lead mt-4 text-center">
+          ¿No tienes una cuenta? <a href="/users/register" class="txt_reg">Registrarme</a>
+        </p>
       </div>
     </div>
   </div>
 </div>
+
+</body>

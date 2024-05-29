@@ -13,6 +13,12 @@ router.get('/login', (req, res) => res.render('login'));
 router.get('/calculator', (req, res) => res.render('calculator'));
 router.get('/EjerciciosD', (req, res) => res.render('EjerciciosD'));
 router.get('/simbologia', (req, res) => res.render('simbologia'));
+router.get('/proyInv', (req, res) => res.render('proyInv'));
+router.get('/tmar', (req, res) => res.render('tmar'));
+router.get('/dashboard', (req, res) => res.render('dashboard'));
+
+
+
 //Register Page
 router.get('/register', (req, res) => res.render('register'));
 
